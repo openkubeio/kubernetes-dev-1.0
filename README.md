@@ -11,4 +11,6 @@
 #### https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 ### Install Script
-    sh provision-dev.sh
+```
+sh provision-dev.sh
+```
