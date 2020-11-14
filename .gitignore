@@ -1,4 +1,5 @@
 *.gem
+*.gem
 *.rbc
 /.config
 /coverage/
@@ -15,11 +16,12 @@
 
 **/*.log
 **/.vagrant
+**/Readme.md
+**/certs/
 data/
 instruction.txt
-**/certs/
 .vs/
-**/Readme.md
+
 
 
 # Used by dotenv library to load environment variables.

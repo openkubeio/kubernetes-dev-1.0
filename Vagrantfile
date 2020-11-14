@@ -6,7 +6,9 @@
 # Pospose : Vagrant script provisions a kubernetes cluster with 1 master node and 2 worker nodes
 #
 # Using yaml to load external configuration files
+
 require 'yaml'
+require 'fileutils'
 
 $install_docker = <<-SCRIPT
 
@@ -188,7 +190,7 @@ sudo tee -a /etc/haproxy/haproxy.cfg << EOF
 #### Config of Ingress Traffic to Kubernetes
 
 frontend localhost
-	bind *:443
+    bind *:443
     option tcplog
     mode tcp
     default_backend nodes
@@ -253,10 +255,8 @@ Vagrant.configure("2") do |config|
   config.hostmanager.ignore_private_ip = false
   
   # Create a data dir to mount with in the VM information
-  dirname = File.dirname("./../data/")
-  unless File.directory?(dirname)
-  FileUtils.mkdir_p(dirname)
-  end
+  FileUtils.mkdir_p './../data/'
+
   
   # Loading in the VM configuration information
   servers = YAML.load_file('servers.yaml')
@@ -296,12 +296,12 @@ Vagrant.configure("2") do |config|
      end
 	 
 	 if servers["name"].include? "machine-p" then
-	    srv.vm.provision "shell", inline: $install_docker
-        srv.vm.provision "shell", inline: $install_kubeadm
-	    srv.vm.provision "shell", inline: $check_config
-		srv.vm.provision "shell", inline: $init_node
-	    srv.vm.provision "shell", inline: $init_proxy
-		srv.vm.provision "shell", inline: $init_nfs
+	   srv.vm.provision "shell", inline: $install_docker
+       srv.vm.provision "shell", inline: $install_kubeadm
+	   srv.vm.provision "shell", inline: $check_config
+	   srv.vm.provision "shell", inline: $init_node
+	   srv.vm.provision "shell", inline: $init_proxy
+	   srv.vm.provision "shell", inline: $init_nfs
      end
 	end
   end
