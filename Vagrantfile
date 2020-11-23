@@ -265,11 +265,11 @@ Vagrant.configure("2") do |config|
     config.vm.define servers["name"] do |srv|
       srv.vm.box = servers["box"] # Speciy the name of the Vagrant box file to use
       srv.vm.hostname = servers["name"] # Set the hostname of the VM
-	# Add a second adapater with a specified IP
+    # Add a second adapater with a specified IP
       srv.vm.network "private_network", ip: servers["ip"], :adapater=>2 
     # srv.vm.network :forwarded_port, guest: 22, host: servers["port"] # Add a port forwarding rule
       srv.vm.synced_folder ".", "/vagrant", type: "virtualbox"
-	  srv.vm.synced_folder "./../data/" , "/data", type: "virtualbox", owner: "root", group: "root", mount_options: ["dmode=777,fmode=777"]
+      srv.vm.synced_folder "./../data/" , "/data", type: "virtualbox", owner: "root", group: "root", mount_options: ["dmode=777,fmode=777"]
 
       srv.vm.provider "virtualbox" do |vb|
         vb.name = servers["name"] # Name of the VM in VirtualBox
@@ -278,31 +278,34 @@ Vagrant.configure("2") do |config|
     #   vb.customize ["modifyvm", :id, "--cpuexecutioncap", "10"]  # Limit to VM to 10% of available 
       end
 	  
-	  if servers["name"].include? "machine-m" then
-		srv.vm.provision "shell", inline: $install_docker
-        srv.vm.provision "shell", inline: $install_kubeadm
-	    srv.vm.provision "shell", inline: $check_config
-		srv.vm.provision "shell", inline: $init_master
-		srv.vm.provision "shell", inline: $post_master	
-        srv.vm.provision "shell", inline: $init_proxy
-		srv.vm.provision "shell", inline: $init_nfs		
-	  end
-	  
-	  if servers["name"].include? "machine-w" then
+      if servers["name"].include? "machine-m" then
 	    srv.vm.provision "shell", inline: $install_docker
-        srv.vm.provision "shell", inline: $install_kubeadm
+            srv.vm.provision "shell", inline: $install_kubeadm
 	    srv.vm.provision "shell", inline: $check_config
-		srv.vm.provision "shell", inline: $init_node
+            srv.vm.provision "shell", inline: $init_master
+            srv.vm.provision "shell", inline: $post_master
+	      
+            srv.vm.provision "shell", inline: $init_proxy
+	    srv.vm.provision "shell", inline: $init_nfs	
+	      
+     end
+	  
+     if servers["name"].include? "machine-w" then
+	    srv.vm.provision "shell", inline: $install_docker
+            srv.vm.provision "shell", inline: $install_kubeadm
+	    srv.vm.provision "shell", inline: $check_config
+	    srv.vm.provision "shell", inline: $init_node
      end
 	 
-	 if servers["name"].include? "machine-p" then
+     if servers["name"].include? "machine-p" then
 	   srv.vm.provision "shell", inline: $install_docker
-       srv.vm.provision "shell", inline: $install_kubeadm
+           srv.vm.provision "shell", inline: $install_kubeadm
 	   srv.vm.provision "shell", inline: $check_config
 	   srv.vm.provision "shell", inline: $init_node
 	   srv.vm.provision "shell", inline: $init_proxy
 	   srv.vm.provision "shell", inline: $init_nfs
      end
-	end
+     
+     end
   end
 end
