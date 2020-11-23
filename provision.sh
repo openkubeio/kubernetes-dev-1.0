@@ -11,9 +11,9 @@ cp ../data/cluster-ubuntu/config ~/.kube/
 
 # Label nodes
 kubectl label node machine-w2  node-role.kubernetes.io/worker=worker
-# kubectl label node machine-w3  node-role.kubernetes.io/worker=worker
-kubectl label node machine-p4  node-role.kubernetes.io/proxy=proxy
+kubectl label node machine-w3  node-role.kubernetes.io/worker=worker
 
-kubectl taint node machine-p4  dedicated=infra:NoSchedule
+# kubectl label node machine-p4  node-role.kubernetes.io/proxy=proxy
+# kubectl taint node machine-p4  dedicated=infra:NoSchedule
 
 kubectl get nodes
