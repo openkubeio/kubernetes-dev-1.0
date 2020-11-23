@@ -7,19 +7,19 @@
   port: 10122
 - name: machine-w2.dev.kube.io
   box: ubuntu/xenial64
-  cpus: 2
-  memory: 2024
+  cpus: 3
+  memory: 8096
   ip: 192.168.210.11
-  port: 10222
+  port: 10122
 #- name: machine-w3.dev.kube.io
 #  box: ubuntu/xenial64
 #  cpus: 1
 #  memory: 1024
 #  ip: 192.168.210.12
 #  port: 10122
-#- name: machine-p4.dev.kube.io
-#  box: ubuntu/xenial64
-#  cpus: 1
-#  memory: 2024
-#  ip: 192.168.205.13
-#  port: 10122
+- name: machine-p4.dev.kube.io
+  box: ubuntu/xenial64
+  cpus: 1
+  memory: 1024
+  ip: 192.168.205.13
+  port: 10122
