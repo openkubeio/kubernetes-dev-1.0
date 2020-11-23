@@ -7,7 +7,7 @@
   port: 10122
 - name: machine-w2.dev.kube.io
   box: ubuntu/xenial64
-  cpus: 3
+  cpus: 4
   memory: 8096
   ip: 192.168.210.11
   port: 10122
