@@ -280,30 +280,21 @@ Vagrant.configure("2") do |config|
 	  
       if servers["name"].include? "machine-m" then
 	    srv.vm.provision "shell", inline: $install_docker
-            srv.vm.provision "shell", inline: $install_kubeadm
+        srv.vm.provision "shell", inline: $install_kubeadm
 	    srv.vm.provision "shell", inline: $check_config
-            srv.vm.provision "shell", inline: $init_master
-            srv.vm.provision "shell", inline: $post_master
+        srv.vm.provision "shell", inline: $init_master
+        srv.vm.provision "shell", inline: $post_master
 	      
-            srv.vm.provision "shell", inline: $init_proxy
+        srv.vm.provision "shell", inline: $init_proxy
 	    srv.vm.provision "shell", inline: $init_nfs	
 	      
      end
 	  
      if servers["name"].include? "machine-w" then
 	    srv.vm.provision "shell", inline: $install_docker
-            srv.vm.provision "shell", inline: $install_kubeadm
+        srv.vm.provision "shell", inline: $install_kubeadm
 	    srv.vm.provision "shell", inline: $check_config
 	    srv.vm.provision "shell", inline: $init_node
-     end
-	 
-     if servers["name"].include? "machine-p" then
-	   srv.vm.provision "shell", inline: $install_docker
-           srv.vm.provision "shell", inline: $install_kubeadm
-	   srv.vm.provision "shell", inline: $check_config
-	   srv.vm.provision "shell", inline: $init_node
-	   srv.vm.provision "shell", inline: $init_proxy
-	   srv.vm.provision "shell", inline: $init_nfs
      end
      
      end

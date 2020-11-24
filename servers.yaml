@@ -17,9 +17,5 @@
   memory: 2048
   ip: 192.168.210.12
   port: 10122
-#- name: machine-p4.dev.kube.io
-#  box: ubuntu/xenial64
-#  cpus: 1
-#  memory: 1024
-#  ip: 192.168.205.13
-#  port: 10122
+
+

@@ -10,10 +10,11 @@ vagrant up --provider=virtualbox
 cp ../data/cluster-ubuntu/config ~/.kube/
 
 # Label nodes
+kubectl label node machine-m1  node-role.kubernetes.io/master=true --overwrite
 kubectl label node machine-w2  node-role.kubernetes.io/worker=true
 kubectl label node machine-w3  node-role.kubernetes.io/worker=true
 
-# kubectl label node machine-p4  node-role.kubernetes.io/proxy=proxy
-# kubectl taint node machine-p4  dedicated=infra:NoSchedule
+
+# kubectl taint node machine-m1 dedicated=infra:NoSchedule
 
 kubectl get nodes
