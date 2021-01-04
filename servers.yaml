@@ -8,13 +8,13 @@
 - name: machine-w2.dev.kube.io
   box: ubuntu/xenial64
   cpus: 4
-  memory: 8096
+  memory: 7500
   ip: 192.168.210.11
   port: 10122
 - name: machine-w3.dev.kube.io
   box: ubuntu/xenial64
-  cpus: 2
-  memory: 2048
+  cpus: 4
+  memory: 5500
   ip: 192.168.210.12
   port: 10122
 

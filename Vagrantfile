@@ -89,6 +89,13 @@ sudo swapoff -a
 #sudo sed -i '/ swap /s/^\(.*\)$/#\1/g' /etc/fstab
 sudo sed -i  '/ swap / s~^~#~g' /etc/fstab
 
+echo "--- enable iptables port forward to enable request forward by node ports"
+iptables -P FORWARD ACCEPT
+
+echo "--- enable network pramaters"
+sysctl net.bridge.bridge-nf-call-iptables=1
+sysctl net.ipv4.ip_forward=1
+
 
 echo "--- Update Kube Config file for removing bootstrap file and cgroup driver"
 
